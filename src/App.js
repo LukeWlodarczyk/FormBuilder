@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Header from "./components/Header";
+import Forms from "./components/Forms";
+import FormCreator from "./components/FormCreator";
+
 class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route path="/" exact component={() => <p>List</p>} />
-          <Route path="/creator" component={() => <p>Creator</p>} />
-          <Route path="/:id" component={() => <p>Form</p>} />
-        </Switch>
+        <div>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Forms} />
+            <Route path="/:id/edit" component={FormCreator} />
+            <Route path="/creator" component={FormCreator} />
+          </Switch>
+        </div>
       </Router>
     );
   }
