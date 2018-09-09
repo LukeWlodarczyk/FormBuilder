@@ -160,7 +160,7 @@ class FormCreator extends Component {
 
     if (isFormEmpty) return;
 
-    const name = prompt("Name");
+    const name = prompt("Type in name of your form");
     const form = JSON.parse(JSON.stringify(this.state.formInputs));
 
     if (name) {
@@ -198,20 +198,30 @@ class FormCreator extends Component {
     const { formInputs } = this.state;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">From Builder</h1>
+      <section className="creator">
+        <header className="section-header">
+          <h1 className="creator-title">Creator</h1>
         </header>
-        {this.prepareToRender(formInputs).map(data => (
-          <InputConfig key={data.id} {...data} values={formInputs} />
-        ))}
-        <button onClick={this.addInput}>Add input</button>
-        {this.props.match.params.id ? (
-          <button onClick={this.updateForm}>Update form</button>
-        ) : (
-          <button onClick={this.saveForm}>Save form</button>
-        )}
-      </div>
+        <section className="creator-content">
+          {this.prepareToRender(formInputs).map(data => (
+            <InputConfig key={data.id} {...data} values={formInputs} />
+          ))}
+        </section>
+        <div className="action-btns">
+          <button className="btn" onClick={this.addInput}>
+            Add input
+          </button>
+          {this.props.match.params.id ? (
+            <button className="btn" onClick={this.updateForm}>
+              Update form
+            </button>
+          ) : (
+            <button className="btn" onClick={this.saveForm}>
+              Save form
+            </button>
+          )}
+        </div>
+      </section>
     );
   }
 }
