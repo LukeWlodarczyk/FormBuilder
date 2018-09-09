@@ -37,13 +37,22 @@ class Forms extends Component {
   render() {
     const { isLoading, isError, forms } = this.state;
     return (
-      <div>
-        <ul>
+      <section>
+        <header className="section-header">
+          <h1 className="forms-title">Your all forms</h1>
+        </header>
+        <ul className="forms-list">
           {isLoading && <p>Loading</p>}
           {forms.map(f => (
-            <li key={f.id}>
-              <Link to={`/${f.id}/edit`}>{f.name}</Link>
-              <button onClick={this.handleDeleteForm} value={f.id}>
+            <li className="list-item" key={f.id}>
+              <Link className="link link-highlight" to={`/${f.id}/edit`}>
+                {f.name}
+              </Link>
+              <button
+                className="btn btn-delete-form"
+                onClick={this.handleDeleteForm}
+                value={f.id}
+              >
                 Delete
               </button>
             </li>
@@ -53,13 +62,15 @@ class Forms extends Component {
             !isLoading &&
             forms.length === 0 && (
               <Fragment>
-                <p>No forms...</p>
-                <Link to={"/creator"}>Create one!</Link>
+                <p style={{ marginBottom: 10 }}>No forms...</p>
+                <Link className="link link-highlight" to={"/creator"}>
+                  Create one!
+                </Link>
               </Fragment>
             )}
           {isError && <p>Error occured!</p>}
         </ul>
-      </div>
+      </section>
     );
   }
 }
