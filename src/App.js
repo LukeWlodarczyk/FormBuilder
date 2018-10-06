@@ -5,6 +5,7 @@ import "./App.css";
 
 import Header from "./components/Header";
 import Forms from "./components/Forms";
+import FormPreview from "./components/FormPreview";
 import FormCreator from "./components/FormCreator";
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Forms} />
             <Route path="/:id/edit" component={FormCreator} />
+            <Route path="/:id" component={FormPreview} />
             <Route path="/creator" component={FormCreator} />
           </Switch>
         </div>
