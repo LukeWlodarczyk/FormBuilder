@@ -61,6 +61,7 @@ body {
 .link {
   color: #727272;
   text-decoration: none;
+  padding: 0 .3em;
 }
 
 .creator > .action-btns {

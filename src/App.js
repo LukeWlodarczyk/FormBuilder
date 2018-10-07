@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./App.css";
 
-import Header from "./components/Header";
-import Forms from "./components/Forms";
-import FormPreview from "./components/FormPreview";
-import FormCreator from "./components/FormCreator";
+import Header from "./components/layout/Header";
+import Forms from "./components/formlist/Forms";
+import FormPreview from "./components/formpreview/FormPreview";
+import FormExport from "./components/formexport/FormExport";
+import FormCreator from "./components/formcreator/FormCreator";
 
 class App extends Component {
   render() {
@@ -16,9 +17,10 @@ class App extends Component {
           <Header />
           <Switch>
             <Route path="/" exact component={Forms} />
-            <Route path="/:id/edit" component={FormCreator} />
-            <Route path="/:id" component={FormPreview} />
             <Route path="/creator" component={FormCreator} />
+            <Route path="/:id/edit" component={FormCreator} />
+            <Route path="/:id/export" component={FormExport} />
+            <Route path="/:id" component={FormPreview} />
           </Switch>
         </div>
       </Router>
