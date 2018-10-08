@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
 import { withDexie } from "../hoc/withDexie";
-
 import { PreviewInput } from "./PreviewInput";
+
+import { prepareToRender } from "../../helpers";
 
 class Preview extends Component {
   state = {
@@ -46,23 +47,6 @@ class Preview extends Component {
     }));
   };
 
-  prepareToRender = object => {
-    const lookup = Symbol();
-    const root = { [lookup]: {}, sub: [] };
-
-    for (const el of Object.values(object)) {
-      let parent = root;
-      for (const part of el.id.split("/")) {
-        if (!parent[lookup][part])
-          parent.sub.push((parent[lookup][part] = { [lookup]: {}, sub: [] }));
-        parent = parent[lookup][part];
-      }
-      Object.assign(parent, el);
-    }
-
-    return root.sub;
-  };
-
   render() {
     const { formInputs } = this.state;
     return (
@@ -71,7 +55,7 @@ class Preview extends Component {
           <h1 className="creator-title">Preview</h1>
         </header>
         <section className="preview-content">
-          {this.prepareToRender(formInputs).map(data => (
+          {prepareToRender(formInputs).map(data => (
             <PreviewInput
               key={data.id}
               {...data}

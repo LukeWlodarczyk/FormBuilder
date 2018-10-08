@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import ShortUniqueId from "short-unique-id";
 
 import { withDexie } from "../hoc/withDexie";
-
 import { InputConfig } from "./InputConfig";
+
+import { prepareToRender } from "../../helpers";
 
 class Creator extends Component {
   state = {
@@ -138,23 +139,6 @@ class Creator extends Component {
     });
   };
 
-  prepareToRender = object => {
-    const lookup = Symbol();
-    const root = { [lookup]: {}, sub: [] };
-
-    for (const el of Object.values(object)) {
-      let parent = root;
-      for (const part of el.id.split("/")) {
-        if (!parent[lookup][part])
-          parent.sub.push((parent[lookup][part] = { [lookup]: {}, sub: [] }));
-        parent = parent[lookup][part];
-      }
-      Object.assign(parent, el);
-    }
-
-    return root.sub;
-  };
-
   saveForm = () => {
     const isFormEmpty = !Object.keys(this.state.formInputs).length;
 
@@ -203,7 +187,7 @@ class Creator extends Component {
           <h1 className="creator-title">Creator</h1>
         </header>
         <section className="creator-content">
-          {this.prepareToRender(formInputs).map(data => (
+          {prepareToRender(formInputs).map(data => (
             <InputConfig key={data.id} {...data} values={formInputs} />
           ))}
         </section>
