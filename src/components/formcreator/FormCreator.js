@@ -71,7 +71,7 @@ class FormCreator extends Component {
         id,
         condition: {
           type: "equals",
-          expect: ""
+          expect: "Yes"
         },
         question: "",
         subInput: true,
