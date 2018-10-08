@@ -39,8 +39,8 @@ class Export extends Component {
         <section className="export-content">
           <textarea
             readOnly
-            cols="30"
-            rows="10"
+            cols="60"
+            rows="15"
             value={JSON.stringify(formInputs)}
           />
         </section>

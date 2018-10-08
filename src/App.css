@@ -61,7 +61,7 @@ body {
 .link {
   color: #727272;
   text-decoration: none;
-  padding: 0 .3em;
+  padding: 0 0.3em;
 }
 
 .creator > .action-btns {
@@ -190,4 +190,8 @@ body {
 .btn-delete-form {
   margin-left: 3em;
   padding: 0.5em;
+}
+
+.export-content {
+  text-align: center;
 }
