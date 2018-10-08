@@ -45,16 +45,19 @@ class FormList extends Component {
           {isLoading && <p>Loading</p>}
           {forms.map(f => (
             <li className="list-item" key={f.id}>
-              {f.name}
+              {f.name} -
               <Link className="link link-highlight" to={`/${f.id}/edit`}>
                 creator
-              </Link>
+              </Link>{" "}
+              -
               <Link className="link link-highlight" to={`/${f.id}`}>
                 preview
-              </Link>
+              </Link>{" "}
+              -
               <Link className="link link-highlight" to={`/${f.id}/export`}>
                 export
-              </Link>
+              </Link>{" "}
+              -
               <button
                 className="btn btn-delete-form"
                 onClick={this.handleDeleteForm}
