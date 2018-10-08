@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-const Inputs = ({
+export const Inputs = ({
   subInput,
   values,
   id,
@@ -70,5 +70,3 @@ const Inputs = ({
     </div>
   </Fragment>
 );
-
-export default Inputs;

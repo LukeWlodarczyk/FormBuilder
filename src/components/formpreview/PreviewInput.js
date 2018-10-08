@@ -16,7 +16,7 @@ const shouldRenderSubs = (conditionType, parentValue, expectValue) => {
   return false;
 };
 
-const PreviewInput = data => (
+export const PreviewInput = data => (
   <Fragment>
     <div className="input-preview">
       <p>{data.question}</p>
@@ -64,5 +64,3 @@ const PreviewInput = data => (
     </div>
   </Fragment>
 );
-
-export default PreviewInput;

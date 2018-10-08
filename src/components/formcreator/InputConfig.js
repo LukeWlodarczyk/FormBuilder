@@ -1,7 +1,7 @@
 import React from "react";
 
-import Inputs from "./Inputs";
-import SubInputs from "./SubInputs";
+import { Inputs } from "./Inputs";
+import { SubInputs } from "./SubInputs";
 
 const condition = {
   text: {
@@ -24,7 +24,7 @@ const condition = {
   }
 };
 
-const InputConfig = ({
+export const InputConfig = ({
   values,
   handleChange,
   handleChangeCondition,
@@ -56,5 +56,3 @@ const InputConfig = ({
     <SubInputs sub={sub} values={values} id={id} />
   </div>
 );
-
-export default InputConfig;

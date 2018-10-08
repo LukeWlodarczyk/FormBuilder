@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import ShortUniqueId from "short-unique-id";
 
-import db from "../../db";
+import { withDexie } from "../hoc/withDexie";
 
-import InputConfig from "./InputConfig";
+import { InputConfig } from "./InputConfig";
 
-class FormCreator extends Component {
+class Creator extends Component {
   state = {
     uid: new ShortUniqueId(),
     formInputs: {}
@@ -14,8 +14,8 @@ class FormCreator extends Component {
   componentDidMount() {
     const id = parseInt(this.props.match.params.id, 10);
     if (id) {
-      db.table("forms")
-        .get(id)
+      this.props.db
+        .getFormById(id)
         .then(data => {
           const form = Object.entries(data.form).reduce((obj, [key, value]) => {
             obj[key] = {
@@ -169,8 +169,8 @@ class FormCreator extends Component {
         form
       };
 
-      db.table("forms")
-        .add(newForm)
+      this.props.db
+        .addForm(newForm)
         .then(() => {
           this.props.history.push("/");
         })
@@ -184,8 +184,8 @@ class FormCreator extends Component {
     const form = JSON.parse(JSON.stringify(this.state.formInputs));
     const id = parseInt(this.props.match.params.id, 10);
 
-    db.table("forms")
-      .update(id, { form })
+    this.props.db
+      .updateFormById(id, { form })
       .then(() => {
         this.props.history.push("/");
       })
@@ -226,4 +226,4 @@ class FormCreator extends Component {
   }
 }
 
-export default FormCreator;
+export const FormCreator = withDexie(Creator);

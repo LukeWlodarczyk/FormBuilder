@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 
-import db from "../../db";
+import { withDexie } from "../hoc/withDexie";
 
-class Forms extends Component {
+class FormList extends Component {
   state = {
     isLoading: false,
     isError: false,
@@ -12,8 +12,8 @@ class Forms extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    db.table("forms")
-      .toArray()
+    this.props.db
+      .getAllFroms()
       .then(forms => {
         this.setState({ forms, isLoading: false });
       })
@@ -24,8 +24,8 @@ class Forms extends Component {
 
   handleDeleteForm = e => {
     const id = parseInt(e.target.value, 10);
-    db.table("forms")
-      .delete(id)
+    this.props.db
+      .deleteFormById(id)
       .then(() => {
         this.setState({ forms: this.state.forms.filter(f => f.id !== id) });
       })
@@ -64,7 +64,6 @@ class Forms extends Component {
               </button>
             </li>
           ))}
-          {}
           {!isError &&
             !isLoading &&
             forms.length === 0 && (
@@ -82,4 +81,4 @@ class Forms extends Component {
   }
 }
 
-export default Forms;
+export const Forms = withDexie(FormList);

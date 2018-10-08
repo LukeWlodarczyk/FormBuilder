@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import db from "../../db";
+import { withDexie } from "../hoc/withDexie";
 
-class FormPreview extends Component {
+class Export extends Component {
   state = {
     formInputs: {}
   };
@@ -10,8 +10,8 @@ class FormPreview extends Component {
   componentDidMount() {
     const id = parseInt(this.props.match.params.id, 10);
     if (id) {
-      db.table("forms")
-        .get(id)
+      this.props.db
+        .getFormById(id)
         .then(data => {
           const form = Object.entries(data.form).reduce((obj, [key, value]) => {
             obj[key] = {
@@ -49,4 +49,4 @@ class FormPreview extends Component {
   }
 }
 
-export default FormPreview;
+export const FormExport = withDexie(Export);

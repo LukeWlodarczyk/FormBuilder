@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-import db from "../../db";
+import { withDexie } from "../hoc/withDexie";
 
-import PreviewInput from "./PreviewInput";
+import { PreviewInput } from "./PreviewInput";
 
-class FormPreview extends Component {
+class Preview extends Component {
   state = {
     formInputs: {}
   };
@@ -12,8 +12,8 @@ class FormPreview extends Component {
   componentDidMount() {
     const id = parseInt(this.props.match.params.id, 10);
     if (id) {
-      db.table("forms")
-        .get(id)
+      this.props.db
+        .getFormById(id)
         .then(data => {
           const form = Object.entries(data.form).reduce((obj, [key, value]) => {
             obj[key] = {
@@ -23,7 +23,6 @@ class FormPreview extends Component {
             };
             return obj;
           }, {});
-          console.log(form);
           this.setState({
             formInputs: form
           });
@@ -35,7 +34,7 @@ class FormPreview extends Component {
   }
 
   handleChange = id => e => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     this.setState(({ formInputs }) => ({
       formInputs: {
         ...formInputs,
@@ -86,4 +85,4 @@ class FormPreview extends Component {
   }
 }
 
-export default FormPreview;
+export const FormPreview = withDexie(Preview);
