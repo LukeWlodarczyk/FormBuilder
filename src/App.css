@@ -195,3 +195,23 @@ body {
 .export-content {
   text-align: center;
 }
+
+.preview-content {
+  text-align: left;
+}
+
+.question-preview {
+  padding: 1em 0;
+}
+
+.label-preview {
+  display: block;
+}
+
+.input-radio-preview {
+  margin-right: 1em;
+}
+
+.preview {
+  padding: 0.5em;
+}
