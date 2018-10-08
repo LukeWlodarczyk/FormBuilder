@@ -1,13 +1,12 @@
 import Dexie from "dexie";
 
-const db = new Dexie("FormBuilder");
-db.version(1).stores({ forms: "++id" });
+const dexie = new Dexie("FormBuilder");
 
-export default db;
+dexie.version(1).stores({ forms: "++id" });
 
-class DB {
+export class DB {
   constructor() {
-    this.db = new Dexie("FormBuilder").version(1).stores({ forms: "++id" });
+    this.db = dexie;
   }
 
   getAll = () => this.db.table("forms").toArray();
